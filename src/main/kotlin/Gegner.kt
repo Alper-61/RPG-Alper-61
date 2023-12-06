@@ -2,4 +2,5 @@ open class Enemy(name: String, hp: Int, actions: List<String>, val enemyType: St
     open fun performAction(action: String, targets: List<Hero>,) {
         println("$name führt die Aktion $action aus")
     }
+
 }

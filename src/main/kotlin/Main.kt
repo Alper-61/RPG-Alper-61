@@ -1,12 +1,4 @@
-import java.awt.Desktop.Action
 open class Battle(val heroes: List<Hero>, val enemies: List<Enemy>, val bag: Bag) {
-    fun summonDarkWizard() {
-        val darkWizard = DarkWizard("Dark Wizard")
-        enemies + darkWizard
-        println("Der Boss hat den Dark Wizard beschworen!")
-    }
-
-
     fun startBattle() {
         var round = 1
         while (heroes.any { it.isAlive() } && enemies.any { it.isAlive() }) {
@@ -18,19 +10,22 @@ open class Battle(val heroes: List<Hero>, val enemies: List<Enemy>, val bag: Bag
                 val action = readln()
                 if (action == "3") {
                     println("Welchen Gegenstand verwenden?\n"+"Healing Potion\n"+"Vitamins")
-                    val item = readLine()!!
+                    val item = readln()
                     bag.useItem(item, hero)
                 } else {
                     val target = enemies.random() // Ziel für Angriffe
                     hero.performAction(action, target)
                 }
+                println("---------------------------")
             }
             // Gegneraktionen
             enemies.forEach { enemy ->
                 val action = enemy.actions.random()
                 enemy.performAction(action, heroes)
-
+                println("$action ausgeführt von ${enemy.name}")
+                println("-------------------------------")
             }
+
             round++
         }
         // Kampfergebnis
@@ -40,6 +35,7 @@ open class Battle(val heroes: List<Hero>, val enemies: List<Enemy>, val bag: Bag
 // Hauptfunktion
 fun main() {
     val bag = Bag()
+
     val heroes = listOf(
         Mage("Mage", 100, listOf("fireball", "heal")),
         Warrior("Warrior", 150, listOf("sword attack", "defend")),
@@ -52,10 +48,3 @@ fun main() {
     val battle = Battle(heroes, enemies, bag)
     battle.startBattle()
 }
-
-
-
-
-
-
-

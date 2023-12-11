@@ -7,7 +7,7 @@ fun main() {
     // Team an Helden
     val helden: MutableList<Hero> = mutableListOf(mage,jaeger,paladin)
     // Gegner
-    val demonLord = DemonLord("Drache",600)
+    val demonLord = DemonLord("DemonenLord Varvatos",600)
     val enemyListe: MutableList<Enemy> = mutableListOf(demonLord)
     spielRunde(helden, enemyListe)
 }
@@ -27,29 +27,29 @@ fun spielRunde(helden: MutableList<Hero>, enemyListe: MutableList<Enemy>) {
         println("--Gegner Team:--")
         var livingenemys = enemyListe.filter { it.isAlive()}.toMutableList() // nur lebende Gegner werden rausgefiltert
         livingenemys.forEach { println(it) }
-        livingenemys = aktionenHelden(livingheroes, livingenemys,inventar)
+        livingenemys = actionHeroes(livingheroes, livingenemys,inventar)
         if (!hasSommoned){
             if ((1..2).random()==1){
                 sommonedKnight( enemyListe)
                 hasSommoned=true
             }else{
-                livingheroes = aktionenGegner(livingenemys, livingheroes)
+                livingheroes = actionEnemys(livingenemys, livingheroes)
                 livingheroes = helden.filter { it.isAlive() }.toMutableList()
             }
         }else {
-            livingheroes = aktionenGegner(livingenemys, livingheroes)
+            livingheroes = actionEnemys(livingenemys, livingheroes)
             livingheroes = helden.filter { it.isAlive() }.toMutableList()
         }
         println("Runde $round beendet!")
-        println("ggf. Status von allen ausdrucken...")
+
         gameOver = gameOver(livingheroes, livingenemys, gameOver)
         round++
     }
     println("Spiel beendet!") // Logik: helden oder gegner tot?
 }
 private fun sommonedKnight(enemyListe: MutableList<Enemy>) {
-        println("Der Drache beschwort einen Babydrachen")
-    enemyListe.add(BabyDrache("Babydrache",150))
+        println("Der DemonenLord Varvatos beschwört seinen Helfer Darkknight")
+    enemyListe.add(DarkKnight("Darkknight",150))
 }
 private fun gameOver(helden: MutableList<Hero>, lebendeEnemy: MutableList<Enemy>, gameOver: Boolean): Boolean {
     var gameOver1 = gameOver
@@ -63,7 +63,7 @@ private fun gameOver(helden: MutableList<Hero>, lebendeEnemy: MutableList<Enemy>
     return gameOver1
 }
 //fertig
-private fun aktionenHelden(heroes: MutableList<Hero>, livingEnemy: MutableList<Enemy>, inventar: Inventar): MutableList<Enemy> {
+private fun actionHeroes(heroes: MutableList<Hero>, livingEnemy: MutableList<Enemy>, inventar: Inventar): MutableList<Enemy> {
     var livingEnemy1 = livingEnemy
     var inputValid = false
     var inventarUsed = false
@@ -108,11 +108,12 @@ private fun aktionenHelden(heroes: MutableList<Hero>, livingEnemy: MutableList<E
     }
     return livingEnemy1
 }
-private fun aktionenGegner(enemy: MutableList<Enemy>, livingHeros: MutableList<Hero>, ): MutableList<Hero> {
+private fun actionEnemys(enemy: MutableList<Enemy>, livingHeros: MutableList<Hero>, ): MutableList<Hero> {
     var livingHero1 = livingHeros
     var inputValid = false
     for (hero in livingHeros){
         if (hero.isVerflucht){
+            println("Ist verflucht worden")
             hero.fluch()
         }
     }
@@ -126,31 +127,31 @@ private fun aktionenGegner(enemy: MutableList<Enemy>, livingHeros: MutableList<H
             if (h is DemonLord){
                 val choice = (1..5).random()
                 if (choice==1){
-                    h.performAction("Feuer Ball",livingHero1.first())
+                    h.performAction("Schwarzes Loch",livingHero1.first())
                 }else if(choice==2){
-                    h.performAction("Fluegelschlag",livingHero1.first())
+                    h.performAction("Feuerregen",livingHero1.first())
                 }else if(choice==3){
                     for (held in livingHeros){
-                        h.performAction("Feueratem",held)
+                        h.performAction("Fegefeuer",held)
                     }
                 }else if(choice==4){
-                    h.performAction("Heilender Feuer Stein",livingHero1.first())
+                    h.performAction("Dunkle Materie",livingHero1.first())
                 }else if(choice==5){
-                    h.performAction("Fluch",livingHero1.random())
+                    h.performAction("Demonen Fluch",livingHero1.random())
                 }
                 inputValid = true
             }else{
                 val choice = (1..4).random()
                 if (choice==1){
-                    h.performAction("Babyschrei",livingHero1.first())
+                    h.performAction("Felsenschlag",livingHero1.first())
                 }else if(choice==2){
-                    h.performAction("Babypups",livingHero1.first())
+                    h.performAction("Verwirrungsschrei",livingHero1.first())
                 }else if(choice==3){
                     for (held in livingHeros){
-                        h.performAction("Drachenmilch",held)
+                        h.performAction("Dunkle Materie",held)
                     }
                 }else if(choice==4){
-                    h.performAction("Fluegelschutz",livingHero1.first())
+                    h.performAction("Schattenrüstung",livingHero1.first())
                 }
                 inputValid = true
             }

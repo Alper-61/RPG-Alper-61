@@ -16,7 +16,7 @@ open class Hero(val name: String, var hp: Int, val maxHp: Int, var isProtected: 
         if((100/maxHp*hp)>20){
             isVerflucht=true
             hp= (hp*0.9).toInt().coerceAtLeast((maxHp*0.2).toInt())
-            println("$name erleidet einen Fluch.Verbleibende HP: $hp")
+            println("$name wird verflucht.Verbleibende HP: $hp")
         }else{
             isVerflucht=false
         }

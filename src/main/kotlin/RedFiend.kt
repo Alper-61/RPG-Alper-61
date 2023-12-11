@@ -1,12 +1,26 @@
-class Diener(name: String,) : Enemy(name, 200, mutableListOf("fire breath", "curse","summon dark wizard"), "Dark Wizard",) {
-    override fun performAction(action: String, targets: List<Hero>,battle: Battle) {
+
+class BabyDrache( name: String,  hp: Int): Enemy(name, hp, hp) {
+    var attacDamage = 20
+    var healAmount = 10
+    var attacDamage2 = 40
+    override fun performAction(action: String, target: Hero) {
+        isProtected = false
         when (action) {
-            "fire breath" -> targets.forEach { it.takeDamage(20) } // Flächenschaden
-            "curse" -> targets.random().takeDamage(10) // Fluch auf zufälligen Helden
-            "summon dark wizard" -> {
-                battle.summonDarkWizard()
-                println("$name hat den Dark Wizard beschworen!")}
-            else -> super.performAction(action, targets,battle)
+            "Babyschrei" -> target.takeDamage(attacDamage)
+            "Babypups"->target.takeDamage(attacDamage2)
+            "Drachenmilch" -> this.heal(healAmount)
+            "Fluegelschutz"->{
+                println("$name nutzt den Schutzpanzer.")
+                isProtected = true
+            }
+            else -> super.performAction(action, target)
         }
     }
 }
+
+
+
+
+
+
+

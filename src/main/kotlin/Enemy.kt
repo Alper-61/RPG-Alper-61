@@ -15,6 +15,7 @@ open class Enemy(val name: String, var hp: Int, val maxHp: Int, var isProtected:
     }
     open fun performAction(action: String, target: Hero) {
 
+
     }
 
     override fun toString(): String{

@@ -9,16 +9,16 @@ class DemonLord(name: String, hp: Int): Enemy(name, hp, hp) {
     override fun performAction(action: String, target: Hero) {
         when (action) {
             "Schwarzes Loch" ->{
-                println("setzt Schwarzes Loch ein.")
+                println("$name setzt Schwarzes Loch ein.")
                 target.takeDamage(attacDamage)
             }
             "Feuerregen" ->{
-                println(" setzt Feuerregen ein")
+                println("$name setzt Feuerregen ein")
                 target.takeDamage(attacDamage2)
             }
             "Fegefeuer" ->{
-                println("setzt Fegefeuer ein")
-                this.takeDamage(feueratemDamage)
+                println("$name setzt Fegefeuer ein Flächenschaden an :")
+                target.takeDamage(feueratemDamage)
             }
             "Dunkle Materie" ->{
                 println("Heilt sich")

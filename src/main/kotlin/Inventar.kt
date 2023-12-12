@@ -1,12 +1,12 @@
 
 class Inventar {
-    // Beutel soll
+    // Inventar(beutel)
     // 3 Heiltränke
     var anzahlHeiltraenke: Int = 3
     // 1 Vitamin
     var anzahlVitamin: Int = 1
-    // haben.
-    // Heiltrank nutzen Methode
+
+    // Heiltrank nutzungs Methode
     fun healItem(target: Hero){
         // schauen ob noch Heiltränke da sind
         if (anzahlHeiltraenke > 0) {

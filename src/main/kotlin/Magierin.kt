@@ -2,14 +2,14 @@
 class Mage(name: String, hp: Int): Hero(name, hp, hp) {
     var actionDamage = 50
     var healAmount = 20
-    var actionsDamage2 = 200
+
     override fun performAction(action: String, target: Enemy) {
         isProtected = false
         when (action) {
             "ZauberSturm" -> target.takeDamage(actionDamage)
             "TodesZauber" ->{
                 target.takeDamage(500)
-                target.takeDamage(actionsDamage2)
+
             }
             "HeilZauber" -> this.heal(healAmount)
             "ZauberSchild"->{

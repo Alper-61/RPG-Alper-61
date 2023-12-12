@@ -18,13 +18,13 @@ fun spielRunde(helden: MutableList<Hero>, enemyListe: MutableList<Enemy>) {
     val inventar = Inventar()
     var hasSommoned = false
     while (!gameOver){
-        println("---Runde $round!---")
-        println("--Unser Team:--")
+        println("\u001B[97m----Runde $round!----\u001B[0m")
+        println("\u001b[94m----Helde Team:----\u001B[0m")
         // print alle helden in meinem team und ihre aktionen --> ueber liste der helden iterieren
         var livingheroes = helden.filter { it.isAlive() }.toMutableList()
         livingheroes.forEach { println(it) }
         // print alle gegner --> ueber liste der gegner iterieren
-        println("--Gegner Team:--")
+        println("\u001b[91m----Team des DemonenLords :---\u001B[0m")
         var livingenemys = enemyListe.filter { it.isAlive()}.toMutableList() // nur lebende Gegner werden rausgefiltert
         livingenemys.forEach { println(it) }
         livingenemys = actionHeroes(livingheroes, livingenemys,inventar)
@@ -54,10 +54,33 @@ private fun sommonedKnight(enemyListe: MutableList<Enemy>) {
 private fun gameOver(helden: MutableList<Hero>, lebendeEnemy: MutableList<Enemy>, gameOver: Boolean): Boolean {
     var gameOver1 = gameOver
     if (helden.isEmpty()) {
-        println("Unsere Helden haben versagt... Game Over :(")
+        println("\u001B[35mDie Helden haben versagt... Game Over :(\u001B[0m")
+        println("#   \$\$\$\$\$\$\\                                           \$\$\$\$\$\$\\                                 \n" +
+                "#  \$\$  __\$\$\\                                         \$\$  __\$\$\\                                \n" +
+                "#  \$\$ /  \\__| \$\$\$\$\$\$\\  \$\$\$\$\$\$\\\$\$\$\$\\   \$\$\$\$\$\$\\        \$\$ /  \$\$ |\$\$\\    \$\$\\  \$\$\$\$\$\$\\   \$\$\$\$\$\$\\  \n" +
+                "#  \$\$ |\$\$\$\$\\  \\____\$\$\\ \$\$  _\$\$  _\$\$\\ \$\$  __\$\$\\       \$\$ |  \$\$ |\\\$\$\\  \$\$  |\$\$  __\$\$\\ \$\$  __\$\$\\ \n" +
+                "#  \$\$ |\\_\$\$ | \$\$\$\$\$\$\$ |\$\$ / \$\$ / \$\$ |\$\$\$\$\$\$\$\$ |      \$\$ |  \$\$ | \\\$\$\\\$\$  / \$\$\$\$\$\$\$\$ |\$\$ |  \\__|\n" +
+                "#  \$\$ |  \$\$ |\$\$  __\$\$ |\$\$ | \$\$ | \$\$ |\$\$   ____|      \$\$ |  \$\$ |  \\\$\$\$  /  \$\$   ____|\$\$ |      \n" +
+                "#  \\\$\$\$\$\$\$  |\\\$\$\$\$\$\$\$ |\$\$ | \$\$ | \$\$ |\\\$\$\$\$\$\$\$\\        \$\$\$\$\$\$  |   \\\$  /   \\\$\$\$\$\$\$\$\\ \$\$ |      \n" +
+                "#   \\______/  \\_______|\\__| \\__| \\__| \\_______|       \\______/     \\_/     \\_______|\\__|      \n" +
+                "#                                                                                             \n" +
+                "#                                                                                             \n" +
+                "#                                                                                             ")
         gameOver1 = true
     } else if (lebendeEnemy.isEmpty()){
-        println("Geschafft! Unsere Helden haben gewonnen! Game Over :) ")
+        println("\u001B[35mGeschafft! Sieg and die Helden ! Congratulations :\u001B[0m) ")
+        println("#   \$\$\$\$\$\$\\                                           \$\$\$\$\$\$\\                                 \n" +
+                "#  \$\$  __\$\$\\                                         \$\$  __\$\$\\                                \n" +
+                "#  \$\$ /  \\__| \$\$\$\$\$\$\\  \$\$\$\$\$\$\\\$\$\$\$\\   \$\$\$\$\$\$\\        \$\$ /  \$\$ |\$\$\\    \$\$\\  \$\$\$\$\$\$\\   \$\$\$\$\$\$\\  \n" +
+                "#  \$\$ |\$\$\$\$\\  \\____\$\$\\ \$\$  _\$\$  _\$\$\\ \$\$  __\$\$\\       \$\$ |  \$\$ |\\\$\$\\  \$\$  |\$\$  __\$\$\\ \$\$  __\$\$\\ \n" +
+                "#  \$\$ |\\_\$\$ | \$\$\$\$\$\$\$ |\$\$ / \$\$ / \$\$ |\$\$\$\$\$\$\$\$ |      \$\$ |  \$\$ | \\\$\$\\\$\$  / \$\$\$\$\$\$\$\$ |\$\$ |  \\__|\n" +
+                "#  \$\$ |  \$\$ |\$\$  __\$\$ |\$\$ | \$\$ | \$\$ |\$\$   ____|      \$\$ |  \$\$ |  \\\$\$\$  /  \$\$   ____|\$\$ |      \n" +
+                "#  \\\$\$\$\$\$\$  |\\\$\$\$\$\$\$\$ |\$\$ | \$\$ | \$\$ |\\\$\$\$\$\$\$\$\\        \$\$\$\$\$\$  |   \\\$  /   \\\$\$\$\$\$\$\$\\ \$\$ |      \n" +
+                "#   \\______/  \\_______|\\__| \\__| \\__| \\_______|       \\______/     \\_/     \\_______|\\__|      \n" +
+                "#                                                                                             \n" +
+                "#                                                                                             \n" +
+                "#                                                                                             ")
+
         gameOver1 = true
     }
     return gameOver1
@@ -74,12 +97,12 @@ private fun actionHeroes(heroes: MutableList<Hero>, livingEnemy: MutableList<Ene
         inputValid = false
         var chooseAcOrIn = 1
         if(!inventarUsed){
-            println("Druecke 1 um eine Aktion auszuwaehlen oder 2  um dem Beutel zu nutzen  ")
+            println("Druecke 1 um eine Aktion auszuwaehlen oder 2 um das Inventar zu öffnen  ")
             chooseAcOrIn = readln().toInt()
         }
         if (chooseAcOrIn==2){
             if (!inventar.isEmpty()){
-                println("Bitte waehle dir etwas von dem Beutel aus")
+                println("Bitte waehle dir etwas aus dem Inventar aus")
                 println(inventar)
                 var inventarChoose = readln().toInt()
                 if(inventarChoose==1){
@@ -90,7 +113,7 @@ private fun actionHeroes(heroes: MutableList<Hero>, livingEnemy: MutableList<Ene
                 inventarUsed=true
             }
         }else{
-            println("${hero.name} greift an. Wähle die Attacke per Zahleneingabe aus!")
+            println("${hero.name} greift an. Wähle die Aktion per Zahleneingabe aus!")
             while (!inputValid){
                 var heroActions = hero.getActionNames()
                 for ( i in heroActions.indices){
@@ -101,7 +124,7 @@ private fun actionHeroes(heroes: MutableList<Hero>, livingEnemy: MutableList<Ene
                     hero.performAction(heroActions[choice-1], livingEnemy1.last())
                     inputValid = true
                 }else{
-                    println("Falsche Zahl, gib eine gültige Zahl ein!")
+                    println("Falsche Zahl, gib bitte eine gültige Zahl ein!")
                 }
             }
         }

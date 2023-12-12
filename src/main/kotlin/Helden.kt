@@ -8,7 +8,7 @@ open class Hero(val name: String, var hp: Int, val maxHp: Int, var isProtected: 
             println("$name erleidet $damage Schaden. Verbleibende HP: $hp")
         }else{
             hp = (hp - damage)
-            println("$name erleidet keinen Schaden wegen dem Schutz")
+            println("$name erleidet keinen Schaden wegen dem Schutzzauber")
         }
     }
     fun fluch(percent: Int = 10){
@@ -32,11 +32,7 @@ open class Hero(val name: String, var hp: Int, val maxHp: Int, var isProtected: 
 
     }
     open fun performAction(action: String, target: Enemy) {
-        when (action) {
-            "attack" -> target.takeDamage(10) // Basisangriff
-            "heal" -> this.heal(15) // Selbstheilung
-            else -> println("Diese Action gibt es nicht")
-        }
+
     }
     open fun getActionNames(): List<String>{
         return emptyList()

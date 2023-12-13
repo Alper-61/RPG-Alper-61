@@ -137,8 +137,10 @@ private fun actionHeroes(heroes: MutableList<Hero>, livingEnemy: MutableList<Ene
                     println("${i + 1} ${heroActions[i]}")
                 }
                 val choice = readln().toInt()
+
                 if (choice > 0 && choice <= (heroActions.size)){
                     hero.performAction(heroActions[choice-1], livingEnemy1.last())
+                    livingEnemy1 = livingEnemy1.filter { it.isAlive() }.toMutableList()
                     inputValid = true
                 }else{
                     println("Falsche Zahl, gib bitte eine gültige Zahl ein!")
@@ -179,6 +181,7 @@ private fun actionEnemys(enemy: MutableList<Enemy>, livingHeros: MutableList<Her
                 }else if(choice==5){
                     h.performAction("Demonen Fluch",livingHero1.random())
                 }
+                livingHero1 = livingHero1.filter { !it.isAlive() }.toMutableList()
                 inputValid = true
             }else{
                 val choice = (1..4).random()
@@ -193,6 +196,7 @@ private fun actionEnemys(enemy: MutableList<Enemy>, livingHeros: MutableList<Her
                 }else if(choice==4){
                     h.performAction("Schattenrüstung",livingHero1.first())
                 }
+                livingHero1 = livingHero1.filter { !it.isAlive() }.toMutableList()
                 inputValid = true
             }
         }

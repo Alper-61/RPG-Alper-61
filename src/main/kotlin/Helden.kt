@@ -4,15 +4,19 @@
 
 open class Hero(val name: String, var hp: Int, val maxHp: Int, var isProtected: Boolean = false, var isVerflucht: Boolean = false)  {
     fun takeDamage(damage: Int) {
-        if((hp-damage) <0){
+        if(!isProtected){
+            if((hp - damage)<0){
+                hp = 0
+            }else{
+                hp = (hp - damage)
+            }
             println("$name erleidet $damage Schaden. Verbleibende HP: $hp")
         }else{
-            hp = (hp - damage)
             println("$name erleidet keinen Schaden wegen dem Schutzzauber")
         }
     }
-    fun fluch(percent: Int = 10){
-        var condition = (100/maxHp*hp)<=20
+
+    fun fluch(percent: Int = 10){// Berechnung leider nur durch Chatgpt erreichen können...
         if((100/maxHp*hp)>20){
             isVerflucht=true
             hp= (hp*0.9).toInt().coerceAtLeast((maxHp*0.2).toInt())
@@ -37,7 +41,7 @@ open class Hero(val name: String, var hp: Int, val maxHp: Int, var isProtected: 
     open fun getActionNames(): List<String>{
         return emptyList()
     }
-    open fun increaseddamage(percent:Int){}
+    open fun increaseVitality(percent:Int){}
     override fun toString(): String{
         return """
             Name: $name

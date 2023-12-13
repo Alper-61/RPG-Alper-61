@@ -8,7 +8,7 @@ class Mage(name: String, hp: Int): Hero(name, hp, hp) {
         when (action) {
             "ZauberSturm" -> target.takeDamage(actionDamage)
             "TodesZauber" ->{
-                target.takeDamage(500)
+                target.takeDamage(200)
 
             }
             "HeilZauber" -> this.heal(healAmount)
@@ -22,7 +22,7 @@ class Mage(name: String, hp: Int): Hero(name, hp, hp) {
     override fun getActionNames(): List<String> {
         return listOf("ZauberSturm","TodesZauber","HeilZauber","ZauberSchild")
     }
-    override fun increaseddamage(percent:Int){
+    override fun increaseVitality(percent:Int){
         actionDamage += (actionDamage/100*percent).toInt()
     }
 }

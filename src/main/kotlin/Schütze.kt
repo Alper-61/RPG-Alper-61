@@ -9,7 +9,7 @@ class Jaeger(name: String, hp: Int): Hero(name, hp, hp) {
         when (action) {
             "Bogenschuss" -> target.takeDamage(actionDamage + Random.nextInt(50))
             "Mehrfachschuss" ->{
-                target.takeDamage(250)
+                target.takeDamage(200)
             }
             "HP Trank" -> this.heal(healAmount)
             "Ultraschild"->{
@@ -22,7 +22,7 @@ class Jaeger(name: String, hp: Int): Hero(name, hp, hp) {
     override fun getActionNames(): List<String> {
         return listOf("Bogenschuss","Mehrfachschuss","Hp Trank","Ultraschild")
     }
-    override fun increaseddamage(percent:Int){
+    override fun increaseVitality(percent:Int){
         actionDamage += (actionDamage/100*percent).toInt()
     }
 }

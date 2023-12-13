@@ -21,11 +21,11 @@ class DemonLord(name: String, hp: Int): Enemy(name, hp, hp) {
                 target.takeDamage(feueratemDamage)
             }
             "Dunkle Materie" ->{
-                println("Heilt sich")
+
                 this.heal(healAmount)
             }
             "Demonen Fluch"->{
-                println("Setzt sein Fluch ein")
+                println("$name setzt ein Fluch ein")
                 target.fluch()
             }
             else -> super.performAction(action, target)

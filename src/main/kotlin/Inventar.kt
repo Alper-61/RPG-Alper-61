@@ -16,11 +16,11 @@ class Inventar {
             anzahlHeiltraenke--
         }
     }
-    fun vitItem(target: Hero){
+    fun boostVitality(target: Hero){
         // schauen ob noch Heiltränke da sind
         if (anzahlVitamin > 0) {
             // benutzen = ein Held bekommt 20% mehr HP
-            target.increaseddamage(10)
+            target.increaseVitality(10)
             // benutzten Heiltrank wegschmeißen
             anzahlVitamin--
         }

@@ -1,14 +1,15 @@
-
 fun main() {
     // Helden
-    val mage = Mage("Merlin", 100)
-    val jaeger = Jaeger("Klein", 100)
-    val paladin = Paladin("Kirito",100)
+    val mage = Mage("Merlin", 200)
+    val jaeger = Jaeger("Klein", 200)
+    val paladin = Paladin("Kirito",200)
     // Team an Helden
     val helden: MutableList<Hero> = mutableListOf(mage,jaeger,paladin)
     // Gegner
     val demonLord = DemonLord("DemonenLord Varvatos",600)
+
     val enemyListe: MutableList<Enemy> = mutableListOf(demonLord)
+
     spielRunde(helden, enemyListe)
 }
 fun spielRunde(helden: MutableList<Hero>, enemyListe: MutableList<Enemy>) {
@@ -17,9 +18,23 @@ fun spielRunde(helden: MutableList<Hero>, enemyListe: MutableList<Enemy>) {
     var round: Int = 1
     val inventar = Inventar()
     var hasSommoned = false
+    println("#  \$\$\\      \$\$\\ \$\$\\ \$\$\\ \$\$\\ \$\$\\                                                                 \n" +
+            "#  \$\$ | \$\\  \$\$ |\\__|\$\$ |\$\$ |\$\$ |                                                                \n" +
+            "#  \$\$ |\$\$\$\\ \$\$ |\$\$\\ \$\$ |\$\$ |\$\$ |  \$\$\\  \$\$\$\$\$\$\\  \$\$\$\$\$\$\\\$\$\$\$\\  \$\$\$\$\$\$\\\$\$\$\$\\   \$\$\$\$\$\$\\  \$\$\$\$\$\$\$\\  \n" +
+            "#  \$\$ \$\$ \$\$\\\$\$ |\$\$ |\$\$ |\$\$ |\$\$ | \$\$  |\$\$  __\$\$\\ \$\$  _\$\$  _\$\$\\ \$\$  _\$\$  _\$\$\\ \$\$  __\$\$\\ \$\$  __\$\$\\ \n" +
+            "#  \$\$\$\$  _\$\$\$\$ |\$\$ |\$\$ |\$\$ |\$\$\$\$\$\$  / \$\$ /  \$\$ |\$\$ / \$\$ / \$\$ |\$\$ / \$\$ / \$\$ |\$\$\$\$\$\$\$\$ |\$\$ |  \$\$ |\n" +
+            "#  \$\$\$  / \\\$\$\$ |\$\$ |\$\$ |\$\$ |\$\$  _\$\$<  \$\$ |  \$\$ |\$\$ | \$\$ | \$\$ |\$\$ | \$\$ | \$\$ |\$\$   ____|\$\$ |  \$\$ |\n" +
+            "#  \$\$  /   \\\$\$ |\$\$ |\$\$ |\$\$ |\$\$ | \\\$\$\\ \\\$\$\$\$\$\$  |\$\$ | \$\$ | \$\$ |\$\$ | \$\$ | \$\$ |\\\$\$\$\$\$\$\$\\ \$\$ |  \$\$ |\n" +
+            "#  \\__/     \\__|\\__|\\__|\\__|\\__|  \\__| \\______/ \\__| \\__| \\__|\\__| \\__| \\__| \\_______|\\__|  \\__|\n" +
+            "#                                                                                               \n" +
+            "#                                                                                               \n" +
+            "#                                                                                               ")
+    Thread.sleep(1500)
+
     while (!gameOver){
         println("\u001B[97m----Runde $round!----\u001B[0m")
-        println("\u001b[94m----Helde Team:----\u001B[0m")
+        Thread.sleep(1000)
+        println("\u001b[94m----Helden Team:----\u001B[0m")
         // print alle helden in meinem team und ihre aktionen --> ueber liste der helden iterieren
         var livingheroes = helden.filter { it.isAlive() }.toMutableList()
         livingheroes.forEach { println(it) }
@@ -29,32 +44,34 @@ fun spielRunde(helden: MutableList<Hero>, enemyListe: MutableList<Enemy>) {
         livingenemys.forEach { println(it) }
         livingenemys = actionHeroes(livingheroes, livingenemys,inventar)
         if (!hasSommoned){
-            if ((1..2).random()==1){
+            if ((1..3).random()==2){
                 sommonedKnight( enemyListe)
                 hasSommoned=true
             }else{
-                livingheroes = actionEnemys(livingenemys, livingheroes)
+                livingheroes = actionEnemys(livingenemys, livingheroes,)
                 livingheroes = helden.filter { it.isAlive() }.toMutableList()
             }
         }else {
-            livingheroes = actionEnemys(livingenemys, livingheroes)
+            livingheroes = actionEnemys(livingenemys,livingheroes)
             livingheroes = helden.filter { it.isAlive() }.toMutableList()
         }
         println("Runde $round beendet!")
 
-        gameOver = gameOver(livingheroes, livingenemys, gameOver)
+            gameOver = gameOver(livingheroes, livingenemys, gameOver)
+
         round++
+
     }
     println("Spiel beendet!") // Logik: helden oder gegner tot?
 }
 private fun sommonedKnight(enemyListe: MutableList<Enemy>) {
         println("Der DemonenLord Varvatos beschwört seinen Helfer Darkknight")
-    enemyListe.add(DarkKnight("Darkknight",150))
+    enemyListe.add(DarkKnight("Darkknight",250))
 }
 private fun gameOver(helden: MutableList<Hero>, lebendeEnemy: MutableList<Enemy>, gameOver: Boolean): Boolean {
     var gameOver1 = gameOver
     if (helden.isEmpty()) {
-        println("\u001B[35mDie Helden haben versagt... Game Over :(\u001B[0m")
+        println("\u001B[35mDie Helden haben versagt, alle Helden sind Tot... Game Over :(\u001B[0m")
         println("#   \$\$\$\$\$\$\\                                           \$\$\$\$\$\$\\                                 \n" +
                 "#  \$\$  __\$\$\\                                         \$\$  __\$\$\\                                \n" +
                 "#  \$\$ /  \\__| \$\$\$\$\$\$\\  \$\$\$\$\$\$\\\$\$\$\$\\   \$\$\$\$\$\$\\        \$\$ /  \$\$ |\$\$\\    \$\$\\  \$\$\$\$\$\$\\   \$\$\$\$\$\$\\  \n" +
@@ -68,7 +85,7 @@ private fun gameOver(helden: MutableList<Hero>, lebendeEnemy: MutableList<Enemy>
                 "#                                                                                             ")
         gameOver1 = true
     } else if (lebendeEnemy.isEmpty()){
-        println("\u001B[35mGeschafft! Sieg and die Helden ! Congratulations :\u001B[0m) ")
+        println("\u001B[35mGeschafft! Sieg and die Helden, die Bösen wurden besiegt! Congratulations :\u001B[0m) ")
         println("#   \$\$\$\$\$\$\\                                           \$\$\$\$\$\$\\                                 \n" +
                 "#  \$\$  __\$\$\\                                         \$\$  __\$\$\\                                \n" +
                 "#  \$\$ /  \\__| \$\$\$\$\$\$\\  \$\$\$\$\$\$\\\$\$\$\$\\   \$\$\$\$\$\$\\        \$\$ /  \$\$ |\$\$\\    \$\$\\  \$\$\$\$\$\$\\   \$\$\$\$\$\$\\  \n" +
@@ -108,7 +125,7 @@ private fun actionHeroes(heroes: MutableList<Hero>, livingEnemy: MutableList<Ene
                 if(inventarChoose==1){
                     inventar.healItem(hero)
                 }else{
-                    inventar.vitItem(hero)
+                    inventar.boostVitality(hero)
                 }
                 inventarUsed=true
             }
